@@ -87,7 +87,12 @@ fn handle_request(
       let json = build_json_object(
         [("server", "MoonBit"), ("version", "0.1.0"), ("runtime", "node")],
       )
-      let _ = res.writeHead(200)
+      let _ = res.writeHead(
+        200,
+        headers=@core.from_entries(
+          [("Content-Type", @core.any("application/json"))],
+        ),
+      )
       res.end(data=json)
     }
     "/greet" => {
